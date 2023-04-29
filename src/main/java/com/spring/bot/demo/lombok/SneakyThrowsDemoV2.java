@@ -18,7 +18,7 @@ import lombok.SneakyThrows;
  * }
  * 
  */
-public class SneakyThrowsDemo {
+public class SneakyThrowsDemoV2 {
 
     @SneakyThrows
     public void read() {
