@@ -10,6 +10,20 @@ this package is demos for spring boot controll's use.
   - deleteById(): Delete-Http for del a book from library.
   - getByName(): Get-Http for query books from library.
 * [BookExceptionHandler](./src/main/java/com/spring/bot/demo/controller/BookExceptionHandler.java) : a controller demo for handling BookException and giving a response with detail error message. 
+```
+curl http://localhost:8333/book/name?name=love
+
+{
+    "code": 2001,
+    "status": 404,
+    "msessage": "book not found",
+    "path": "/book/name",
+    "timestamp": "2023-04-30T03:19:03.641352Z",
+    "data": {
+        "book name:": "love"
+    }
+}
+```
 
 ## $\color{#FF0000}{component}$
 this package is demos for spring boot property's use.
