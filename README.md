@@ -9,7 +9,7 @@ this package is demos for spring boot controller's use.
   - add(): Post-Http for add book to library.
   - deleteById(): Delete-Http for del a book from library.
   - getByName(): Get-Http for query books from library.
-* [BookExceptionHandler](./src/main/java/com/spring/bot/demo/controller/BookExceptionHandler.java) : a controller demo for handling BookException and giving a response with detail error message. 
+* [AppExceptionHandler](./src/main/java/com/spring/bot/demo/controller/AppExceptionHandler.java) : a controller demo for handling all kinds of app BaseException and giving a response with detail error message. 
 ```
 curl http://localhost:8333/book/name?name=love
 

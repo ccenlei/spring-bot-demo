@@ -12,7 +12,9 @@ public enum ErrorCode {
     RESOURCE_NOT_FOUND(1001, HttpStatus.NOT_FOUND, "no such resource foud"),
     REQUEST_VALIDATION_FAILED(1002, HttpStatus.BAD_REQUEST, "request validate failed."),
 
-    BOOK_NOT_FOUND(2001, HttpStatus.NOT_FOUND, "book not found");
+    BOOK_NOT_FOUND(2001, HttpStatus.NOT_FOUND, "book not found"),
+
+    MINT_USER_NOT_FOUND(3101, HttpStatus.NOT_FOUND, "mint fun user not found");
 
     private final int code;
 
