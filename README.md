@@ -2,7 +2,7 @@
 spring bot demo
 
 ## $\color{#FF0000}{controller}$
-this package is demos for spring boot controll's use.
+this package is demos for spring boot controller's use.
 
 * [HelloWorldController](./src/main/java/com/spring/bot/demo/controller/HelloWorldController.java) : a controller demo.
 + [BookController](./src/main/java/com/spring/bot/demo/controller/BookController.java) : a controller demo for book library. 
@@ -16,7 +16,7 @@ curl http://localhost:8333/book/name?name=love
 {
     "code": 2001,
     "status": 404,
-    "msessage": "book not found",
+    "message": "book not found",
     "path": "/book/name",
     "timestamp": "2023-04-30T03:19:03.641352Z",
     "data": {
@@ -42,5 +42,5 @@ this package is demos for spring boot lombok's use. more details see: [lomboks](
 ## $\color{#FF0000}{exception}$
 this package is demos for spring bot app exceptions handling ways. there are 3 important classes: 
 * [ErrorCode](./src/main/java/com/spring/bot/demo/exception/ErrorCode.java) :  contains app error code, http response code and http response message.
-* [xxxException](./src/main/java/com/spring/bot/demo/exception/BaseException.java) : implements of system runnig exceptions.
+* [xxxException](./src/main/java/com/spring/bot/demo/exception/BaseException.java) : implements of system runtime exceptions.
 * [ErrorResponse](./src/main/java/com/spring/bot/demo/exception/ErrorResponse.java) : http response entity.
