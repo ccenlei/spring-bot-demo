@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.ImmutableMap;
 import com.spring.bot.demo.component.LibraryProperties;
 import com.spring.bot.demo.entity.Book;
+import com.spring.bot.demo.exception.BookException;
 
 @RestController
 @RequestMapping("/book")
@@ -46,6 +49,9 @@ public class BookController {
         List<Book> targets = library.getBooks().stream()
                 .filter(book -> name.equals(book.getName()))
                 .collect(Collectors.toList());
+        if (ObjectUtils.isEmpty(targets)) {
+            throw new BookException(ImmutableMap.of("book name:", name));
+        }
         return ResponseEntity.ok(targets);
     }
 
