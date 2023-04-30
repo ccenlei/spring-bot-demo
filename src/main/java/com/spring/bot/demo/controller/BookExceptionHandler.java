@@ -23,7 +23,7 @@ public class BookExceptionHandler {
         ErrorResponse response = ErrorResponse.builder()
                 .code(code.getCode())
                 .status(code.getStatus().value())
-                .msessage(code.getMessage())
+                .message(code.getMessage())
                 .path(request.getRequestURI())
                 .timestamp(Instant.now())
                 .data(ex.getData())

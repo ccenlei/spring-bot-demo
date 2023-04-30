@@ -21,7 +21,7 @@ public class ErrorResponse {
 
     private int status;
 
-    private String msessage;
+    private String message;
 
     private String path;
 
