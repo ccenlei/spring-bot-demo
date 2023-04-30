@@ -20,7 +20,7 @@ import com.spring.bot.demo.entity.MintUser;
  *                            "user_sex")})
  */
 @Mapper
-public interface MintUserDao {
+public interface MintUserMapper {
 
     @Select("SELECT * FROM mint_fun_user WHERE id = #{id}")
     MintUser selectUserById(@Param("id") Integer id);
@@ -28,7 +28,8 @@ public interface MintUserDao {
     @Select("SELECT * FROM mint_fun_user WHERE name = #{name}")
     List<MintUser> selectUserByName(@Param("name") String name);
 
-    // todo 分页查询
+    @Select("SELECT * FROM mint_fun_user")
+    List<MintUser> selectAll();
 
     @Insert("INSERT INTO mint_fun_user (name, addr, following, followers) VALUES (#{name}, #{addr}, #{following}, #{followers})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

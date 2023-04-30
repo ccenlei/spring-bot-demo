@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.ImmutableMap;
 import com.spring.bot.demo.entity.MintUser;
+import com.spring.bot.demo.entity.PageHelperUtil;
 import com.spring.bot.demo.exception.ErrorCode;
 import com.spring.bot.demo.exception.MintFunException;
 import com.spring.bot.demo.service.MintUseService;
@@ -43,6 +44,13 @@ public class MintFunController {
             throw new MintFunException(ImmutableMap.of("user name:", name), ErrorCode.MINT_USER_NOT_FOUND);
         }
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/user/all")
+    public ResponseEntity<PageHelperUtil> getUserByPage(@RequestParam("page") Integer page,
+            @RequestParam("rows") Integer rows) {
+        PageHelperUtil helperUtil = useService.findUserByPage(page, rows);
+        return ResponseEntity.ok(helperUtil);
     }
 
     @PostMapping("/user/add")
