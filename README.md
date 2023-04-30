@@ -16,7 +16,7 @@ this package is demos for spring boot property's use.
 ### [LibraryProperties](./src/main/java/com/spring/bot/demo/component/LibraryProperties.java) :  a demo for spring boot loads property.
 
 ## $\color{#FF0000}{lombok}$
-this package is demos for spring boot lombok's use.
+this package is demos for spring boot lombok's use. more details see: [lomboks](https://hezhiqiang8909.gitbook.io/java/docs/javalib/lombok)
 
 ### [SynchronizedDemo](./src/main/java/com/spring/bot/demo/lombok/SynchronizedDemo.java) :  a demo for synchronizing functions.
 

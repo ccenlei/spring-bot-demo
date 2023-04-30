@@ -11,6 +11,11 @@ import com.spring.bot.demo.entity.Book;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * @PropertySource: this this annotation means read library.properties file from resources dir.
+ * 
+ * @ConfigurationProperties: this this annotation means load properties with the prefix = "library"
+ */
 @Component
 @PropertySource("classpath:library.properties")
 @ConfigurationProperties(prefix = "library")
