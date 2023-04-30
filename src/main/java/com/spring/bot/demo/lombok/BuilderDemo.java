@@ -5,6 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * @Builder: this annotation can make class become chain codeable.
+ * 
+ * @ToString: this annotation equals .toString() function.
+ * 
+ * @Getter: this annotation equals .getXXX() function.
+ * 
+ * @Setter: this annotation equals .setXXX() function.
+ */
 @Builder
 @ToString
 @Getter
