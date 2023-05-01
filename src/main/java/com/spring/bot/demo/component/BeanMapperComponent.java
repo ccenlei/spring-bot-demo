@@ -9,7 +9,7 @@ import com.spring.bot.demo.utils.MintNftBeanMapper;
 import com.spring.bot.demo.utils.MintUserBeanMapper;
 
 @Component
-public class BeanMapperConfig {
+public class BeanMapperComponent {
 
     @Bean
     public BookBeanMapper bookBeanMapper() {

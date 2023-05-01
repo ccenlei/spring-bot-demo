@@ -25,6 +25,7 @@ import com.spring.bot.demo.utils.BookBeanMapper;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/book")
@@ -39,7 +40,7 @@ public class BookController {
     private BookBeanMapper bMapper;
 
     @PostMapping("/add")
-    public ResponseEntity<List<BookDto>> add(@RequestBody BookDto bookDto) {
+    public ResponseEntity<List<BookDto>> add(@RequestBody @Valid BookDto bookDto) {
         Book book = bMapper.toSource(bookDto);
         book.setId(ids.getAndIncrement());
         library.getBooks().add(book);

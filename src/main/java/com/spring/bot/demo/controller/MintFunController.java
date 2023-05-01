@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,11 @@ import com.spring.bot.demo.utils.MintNftBeanMapper;
 import com.spring.bot.demo.utils.MintUserBeanMapper;
 import com.spring.bot.demo.utils.PageHelperUtil;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
+@Validated
 @RestController
 @RequestMapping("/api/mint")
 public class MintFunController {
@@ -45,7 +51,7 @@ public class MintFunController {
     private MintUserBeanMapper uMapper;
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<MintUserDto> getUserById(@PathVariable("id") Integer id) {
+    public ResponseEntity<MintUserDto> getUserById(@PathVariable("id") @Valid @Min(1) Integer id) {
         MintUser uMintUser = useService.findUserById(id);
         if (ObjectUtils.isEmpty(uMintUser)) {
             throw new MintFunException(ImmutableMap.of("user id:", id), ErrorCode.MINT_USER_NOT_FOUND);
@@ -55,7 +61,7 @@ public class MintFunController {
     }
 
     @GetMapping("/user/detail/{id}")
-    public ResponseEntity<MintUserDto> getUserDetailById(@PathVariable("id") Integer id) {
+    public ResponseEntity<MintUserDto> getUserDetailById(@PathVariable("id") @Valid @Min(1) Integer id) {
         MintUser uMintUser = useService.findUserDetailById(id);
         if (ObjectUtils.isEmpty(uMintUser)) {
             throw new MintFunException(ImmutableMap.of("user id:", id), ErrorCode.MINT_USER_DETAIL_NOT_FOUND);
@@ -65,7 +71,7 @@ public class MintFunController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<MintUserDto>> getUserByName(@RequestParam("name") String name) {
+    public ResponseEntity<List<MintUserDto>> getUserByName(@RequestParam("name") @Valid @NotBlank String name) {
         List<MintUser> users = useService.findUserByName(name);
         if (ObjectUtils.isEmpty(users)) {
             throw new MintFunException(ImmutableMap.of("user name:", name), ErrorCode.MINT_USER_NOT_FOUND);
@@ -85,26 +91,27 @@ public class MintFunController {
     }
 
     @PostMapping("/user/add")
-    public ResponseEntity<?> addUser(@RequestBody MintUserDto userDto) {
+    public ResponseEntity<?> addUser(@RequestBody @Valid MintUserDto userDto) {
         MintUser user = uMapper.toSource(userDto);
         useService.saveUser(user);
         return ResponseEntity.accepted().build();
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> removeUserById(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> removeUserById(@PathVariable("id") @Valid @Min(1) Integer id) {
         useService.removeUserById(id);
         return ResponseEntity.accepted().build();
     }
 
     @PostMapping("/user/update")
-    public ResponseEntity<?> updateUser(@RequestBody MintUser mUser) {
-        useService.modifyUserById(mUser);
+    public ResponseEntity<?> updateUser(@RequestBody @Valid MintUserDto userDto) {
+        MintUser user = uMapper.toSource(userDto);
+        useService.modifyUserById(user);
         return ResponseEntity.accepted().build();
     }
 
     @GetMapping("/nft/{id}")
-    public ResponseEntity<MintNftDto> getNftById(@PathVariable("id") Integer id) {
+    public ResponseEntity<MintNftDto> getNftById(@PathVariable("id") @Valid @Min(1) Integer id) {
         MintNft nMintNft = nftService.findNftById(id);
         if (ObjectUtils.isEmpty(nMintNft)) {
             throw new MintFunException(ImmutableMap.of("nft id:", id), ErrorCode.MINT_NFT_NOT_FOUND);
@@ -114,7 +121,7 @@ public class MintFunController {
     }
 
     @GetMapping("/nft")
-    public ResponseEntity<List<MintNftDto>> getNftByName(@RequestParam("name") String name) {
+    public ResponseEntity<List<MintNftDto>> getNftByName(@RequestParam("name") @Valid @NotBlank String name) {
         List<MintNft> nfts = nftService.findNftByName(name);
         if (ObjectUtils.isEmpty(nfts)) {
             throw new MintFunException(ImmutableMap.of("nft name:", name), ErrorCode.MINT_NFT_NOT_FOUND);

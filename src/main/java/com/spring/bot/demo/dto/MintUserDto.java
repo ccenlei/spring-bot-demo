@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -14,6 +15,7 @@ public class MintUserDto {
 
     private String name;
 
+    @NotBlank(message = "addr can't be blank")
     private String addr;
 
     private Integer following;
