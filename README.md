@@ -11,7 +11,7 @@ this package is demos for spring boot controller's use.
   - getByName(): Get-Http for query books from library.
 * [AppExceptionHandler](./src/main/java/com/spring/bot/demo/controller/AppExceptionHandler.java) : a controller demo for handling all kinds of app BaseException and giving a response with detail error message. 
 ```
-curl http://localhost:8333/book/name?name=love
+curl http://localhost:8333/api/book/name?name=love
 
 {
     "code": 2001,
@@ -26,7 +26,7 @@ curl http://localhost:8333/book/name?name=love
 ```
 * [MintFunController](./src/main/java/com/spring/bot/demo/controller/MintFunController.java) : mybatis operation demo.(contains pagination query and multi-table join query)
 ```
-http://localhost:8333/mint/user/all?page=1&rows=3
+curl http://localhost:8333/api/mint/user/all?page=1&rows=3
 
 {
     "total": 5,
@@ -51,7 +51,7 @@ http://localhost:8333/mint/user/all?page=1&rows=3
     ]
 }
 
-http://localhost:8333/mint/user/detail/2
+curl http://localhost:8333/api/mint/user/detail/2
 
 {
     "id": 2,

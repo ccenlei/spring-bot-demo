@@ -19,7 +19,7 @@ public class BookExceptionTests {
 
     @Test
     void should_return_404_if_name_none() throws Exception {
-        mockMvc.perform(get("/book/name?name=love"))
+        mockMvc.perform(get("/api/book/name?name=love"))
                 .andExpect(status().is(404))
                 .andExpect(jsonPath("$.message").value("book not found"));
     }

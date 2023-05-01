@@ -24,7 +24,7 @@ import com.spring.bot.demo.service.MintNftService;
 import com.spring.bot.demo.service.MintUseService;
 
 @RestController
-@RequestMapping("/mint")
+@RequestMapping("/api/mint")
 public class MintFunController {
 
     @Autowired

@@ -19,14 +19,14 @@ public class MintFunControllerTests {
 
     @Test
     void should_return_user_if_id_1() throws Exception {
-        mockMvc.perform(get("/mint/user/1"))
+        mockMvc.perform(get("/api/mint/user/1"))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.name").value("sjaskillz"));
     }
 
     @Test
     void should_return_404_if_id_none() throws Exception {
-        mockMvc.perform(get("/mint/user/0"))
+        mockMvc.perform(get("/api/mint/user/0"))
                 .andExpect(status().is(404))
                 .andExpect(jsonPath("$.code").value(3101));
     }
