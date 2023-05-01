@@ -21,8 +21,12 @@ import com.spring.bot.demo.component.LibraryProperties;
 import com.spring.bot.demo.entity.Book;
 import com.spring.bot.demo.exception.BookException;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/api/book")
+@Api(value = "book", tags = "book api")
 public class BookController {
 
     private LibraryProperties library;
@@ -45,6 +49,7 @@ public class BookController {
     }
 
     @GetMapping("/name")
+    @ApiOperation(value = "Get books", notes = "Get books detail by book name", httpMethod = "GET")
     public ResponseEntity<List<Book>> getByName(@RequestParam("name") String name) {
         List<Book> targets = library.getBooks().stream()
                 .filter(book -> name.equals(book.getName()))
