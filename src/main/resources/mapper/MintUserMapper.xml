@@ -11,10 +11,10 @@
         <result column="following" property="following" jdbcType="INTEGER"/>
         <result column="followers" property="followers" jdbcType="INTEGER"/>
         <collection property="mNfts" ofType="com.spring.bot.demo.entity.MintNft">
-            <result column="id" property="id" jdbcType="INTEGER"/>
-            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <id column="nid" property="id" jdbcType="INTEGER"/>
+            <result column="nname" property="name" jdbcType="VARCHAR"/>
             <result column="token_id" property="tokenId" jdbcType="VARCHAR"/>
-            <result column="addr" property="addr" jdbcType="VARCHAR"/>
+            <result column="naddr" property="addr" jdbcType="VARCHAR"/>
             <result column="creator" property="creator" jdbcType="VARCHAR"/>
             <result column="total" property="total" jdbcType="INTEGER"/>
             <result column="owner_id" property="ownerId" jdbcType="INTEGER"/>
@@ -22,7 +22,7 @@
     </resultMap>
 
     <select id="selectUserDetailById" parameterType="Integer" resultMap="userResultMap">
-        SELECT u.id, u.name, u.addr, u.following, u.followers, n.id, n.name, n.token_id, n.addr, n.creator, n.total, n.owner_id 
+        SELECT u.id, u.name, u.addr, u.following, u.followers, n.id as nid, n.name as nname, n.token_id, n.addr as naddr, n.creator, n.total, n.owner_id 
         FROM mint_fun_user u
         JOIN mint_fun_nft n
         ON n.owner_id = u.id

@@ -61,19 +61,19 @@ http://localhost:8333/mint/user/detail/2
     "followers": 0,
     "mnfts": [
         {
-            "id": 2,
-            "name": "xpub.eth",
+            "id": 4,
+            "name": "PsychoNauts",
             "tokenId": "#3655",
-            "addr": "xpub.eth",
+            "addr": "0xe05590833120f8a671d43aa3e9870fed9361b4ca",
             "creator": "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0",
             "total": 7777,
             "ownerId": 2
         },
         {
-            "id": 2,
-            "name": "xpub.eth",
+            "id": 5,
+            "name": "PsychoNauts",
             "tokenId": "#3654",
-            "addr": "xpub.eth",
+            "addr": "0xe05590833120f8a671d43aa3e9870fed9361b4ca",
             "creator": "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0",
             "total": 7777,
             "ownerId": 2
