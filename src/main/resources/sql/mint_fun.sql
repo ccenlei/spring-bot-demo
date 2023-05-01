@@ -25,17 +25,17 @@ CREATE TABLE `mint_fun_nft` (
   KEY `owner_index` (`owner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci COMMENT='Mint fun nft info';
 
-insert info mint_fun_nft (name, token_id, addr, creator, total, owner) values 
+insert into mint_fun_nft (name, token_id, addr, creator, total, owner_id) values 
                          ("PsychoNauts", "#2676", "0xe05590833120f8a671d43aa3e9870fed9361b4ca", "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0", 7777, 3);
-insert info mint_fun_nft (name, token_id, addr, creator, total, owner) values 
+insert into mint_fun_nft (name, token_id, addr, creator, total, owner_id) values 
                          ("PsychoNauts", "#2675", "0xe05590833120f8a671d43aa3e9870fed9361b4ca", "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0", 7777, 3); 
-insert info mint_fun_nft (name, token_id, addr, creator, total, owner) values 
+insert into mint_fun_nft (name, token_id, addr, creator, total, owner_id) values 
                          ("PsychoNauts", "#2674", "0xe05590833120f8a671d43aa3e9870fed9361b4ca", "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0", 7777, 3); 
-insert info mint_fun_nft (name, token_id, addr, creator, total, owner) values 
+insert into mint_fun_nft (name, token_id, addr, creator, total, owner_id) values 
                          ("PsychoNauts", "#3655", "0xe05590833120f8a671d43aa3e9870fed9361b4ca", "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0", 7777, 2); 
-insert info mint_fun_nft (name, token_id, addr, creator, total, owner) values 
+insert into mint_fun_nft (name, token_id, addr, creator, total, owner_id) values 
                          ("PsychoNauts", "#3654", "0xe05590833120f8a671d43aa3e9870fed9361b4ca", "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0", 7777, 2); 
-insert info mint_fun_nft (name, token_id, addr, creator, total, owner) values 
+insert into mint_fun_nft (name, token_id, addr, creator, total, owner_id) values 
                          ("Dot Dot Punks", "#170", "0x9b5ac0fba34e43f92b95e9160ad68a91f1657d3d", "0xdda4e7fc052913548a68bad6581710ef9dc21419", 307, 1); 
 
          

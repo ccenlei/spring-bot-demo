@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.ImmutableMap;
+import com.spring.bot.demo.entity.MintNft;
 import com.spring.bot.demo.entity.MintUser;
 import com.spring.bot.demo.entity.PageHelperUtil;
 import com.spring.bot.demo.exception.ErrorCode;
 import com.spring.bot.demo.exception.MintFunException;
+import com.spring.bot.demo.service.MintNftService;
 import com.spring.bot.demo.service.MintUseService;
 
 @RestController
@@ -27,6 +29,9 @@ public class MintFunController {
 
     @Autowired
     private MintUseService useService;
+
+    @Autowired
+    private MintNftService nftService;
 
     @GetMapping("/user/{id}")
     public ResponseEntity<MintUser> getUserById(@PathVariable("id") Integer id) {
@@ -69,5 +74,23 @@ public class MintFunController {
     public ResponseEntity<?> updateUser(@RequestBody MintUser mUser) {
         useService.modifyUserById(mUser);
         return ResponseEntity.accepted().build();
+    }
+
+    @GetMapping("/nft/{id}")
+    public ResponseEntity<MintNft> getNftById(@PathVariable("id") Integer id) {
+        MintNft nMintNft = nftService.findNftById(id);
+        if (ObjectUtils.isEmpty(nMintNft)) {
+            throw new MintFunException(ImmutableMap.of("nft id:", id), ErrorCode.MINT_NFT_NOT_FOUND);
+        }
+        return ResponseEntity.ok(nMintNft);
+    }
+
+    @GetMapping("/nft")
+    public ResponseEntity<List<MintNft>> getNftByName(@RequestParam("name") String name) {
+        List<MintNft> nfts = nftService.findNftByName(name);
+        if (ObjectUtils.isEmpty(nfts)) {
+            throw new MintFunException(ImmutableMap.of("nft name:", name), ErrorCode.MINT_NFT_NOT_FOUND);
+        }
+        return ResponseEntity.ok(nfts);
     }
 }

@@ -1,4 +1,4 @@
-package com.spring.bot.demo;
+package com.spring.bot.demo.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +12,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class BookExceptionTests {
+public class MintFunControllerTests {
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
-    void should_return_404_if_name_none() throws Exception {
-        mockMvc.perform(get("/book/name?name=love"))
+    void should_return_user_if_id_1() throws Exception {
+        mockMvc.perform(get("/mint/user/1"))
+                .andExpect(status().is(200))
+                .andExpect(jsonPath("$.name").value("sjaskillz"));
+    }
+
+    @Test
+    void should_return_404_if_id_none() throws Exception {
+        mockMvc.perform(get("/mint/user/0"))
                 .andExpect(status().is(404))
-                .andExpect(jsonPath("$.message").value("book not found"));
+                .andExpect(jsonPath("$.code").value(3101));
     }
 }

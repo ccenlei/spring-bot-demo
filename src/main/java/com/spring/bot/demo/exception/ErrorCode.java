@@ -14,7 +14,8 @@ public enum ErrorCode {
 
     BOOK_NOT_FOUND(2001, HttpStatus.NOT_FOUND, "book not found"),
 
-    MINT_USER_NOT_FOUND(3101, HttpStatus.NOT_FOUND, "mint fun user not found");
+    MINT_USER_NOT_FOUND(3101, HttpStatus.NOT_FOUND, "mint fun user not found"),
+    MINT_NFT_NOT_FOUND(3102, HttpStatus.NOT_FOUND, "mint fun nft not found");
 
     private final int code;
 

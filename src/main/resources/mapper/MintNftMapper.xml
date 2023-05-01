@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.bot.demo.dao.MintNftMapper">
+
+    <resultMap id="nftResultMap" type="com.spring.bot.demo.entity.MintNft">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="token_id" property="tokenId" jdbcType="VARCHAR"/>
+        <result column="addr" property="addr" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="INTEGER"/>
+        <result column="owner_id" property="ownerId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="insertNft" parameterType="com.spring.bot.demo.entity.MintNft" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO mint_fun_nft (name, token_id, addr, creator, total, owner_id) VALUES 
+                         (#{name}, #{tokenId}, #{addr}, #{creator}, #{total}, #{ownerId});
+    </insert>
+
+    <select id="selectNftById" parameterType="Integer" resultMap="nftResultMap">
+        SELECT * FROM mint_fun_nft WHERE id = #{id}
+    </select>
+
+    <select id="selecNftByName" parameterType="String" resultMap="nftResultMap">
+        SELECT * FROM mint_fun_nft WHERE name = #{name}
+    </select>
+</mapper>
