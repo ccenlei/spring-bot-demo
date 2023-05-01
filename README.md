@@ -25,6 +25,62 @@ curl http://localhost:8333/book/name?name=love
 }
 ```
 * [MintFunController](./src/main/java/com/spring/bot/demo/controller/MintFunController.java) : mybatis operation demo.(contains pagination query and multi-table join query)
+```
+http://localhost:8333/mint/user/all?page=1&rows=3
+
+{
+    "total": 5,
+    "pageTotal": 2,
+    "page": 1,
+    "pageRows": 2,
+    "dataTs": [
+        {
+            "id": 1,
+            "name": "sjaskillz",
+            "addr": "0x4306dd0c18b58e34e587003841d736a449392d49",
+            "following": 118,
+            "followers": 65
+        },
+        {
+            "id": 2,
+            "name": "xpub.eth",
+            "addr": "xpub.eth",
+            "following": 22,
+            "followers": 0
+        }
+    ]
+}
+
+http://localhost:8333/mint/user/detail/2
+
+{
+    "id": 2,
+    "name": "xpub.eth",
+    "addr": "xpub.eth",
+    "following": 22,
+    "followers": 0,
+    "mnfts": [
+        {
+            "id": 2,
+            "name": "xpub.eth",
+            "tokenId": "#3655",
+            "addr": "xpub.eth",
+            "creator": "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0",
+            "total": 7777,
+            "ownerId": 2
+        },
+        {
+            "id": 2,
+            "name": "xpub.eth",
+            "tokenId": "#3654",
+            "addr": "xpub.eth",
+            "creator": "0x75af3607db30bbdf3c51aa59c8a346dab9b2f7b0",
+            "total": 7777,
+            "ownerId": 2
+        }
+    ]
+}
+```
 
 ## $\color{#FF0000}{component}$
 this package is demos for spring boot property's use.
