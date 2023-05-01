@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.bot.demo.dao.MintUserMapper">
+
+    <resultMap id="userResultMap" type="com.spring.bot.demo.entity.MintUser">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="addr" property="addr" jdbcType="VARCHAR"/>
+        <result column="following" property="following" jdbcType="INTEGER"/>
+        <result column="followers" property="followers" jdbcType="INTEGER"/>
+        <collection property="mNfts" ofType="com.spring.bot.demo.entity.MintNft">
+            <result column="id" property="id" jdbcType="INTEGER"/>
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="token_id" property="tokenId" jdbcType="VARCHAR"/>
+            <result column="addr" property="addr" jdbcType="VARCHAR"/>
+            <result column="creator" property="creator" jdbcType="VARCHAR"/>
+            <result column="total" property="total" jdbcType="INTEGER"/>
+            <result column="owner_id" property="ownerId" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectUserDetailById" parameterType="Integer" resultMap="userResultMap">
+        SELECT u.id, u.name, u.addr, u.following, u.followers, n.id, n.name, n.token_id, n.addr, n.creator, n.total, n.owner_id 
+        FROM mint_fun_user u
+        JOIN mint_fun_nft n
+        ON n.owner_id = u.id
+        WHERE u.id = #{id}
+    </select>
+</mapper>

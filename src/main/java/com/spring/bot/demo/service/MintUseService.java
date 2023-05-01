@@ -50,4 +50,9 @@ public class MintUseService {
     public void modifyUserById(MintUser mUser) {
         uMapper.updateUserById(mUser);
     }
+
+    public MintUser findUserDetailById(Integer id) {
+        MintUser user = uMapper.selectUserDetailById(id);
+        return user;
+    }
 }

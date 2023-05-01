@@ -24,7 +24,7 @@ curl http://localhost:8333/book/name?name=love
     }
 }
 ```
-* [MintFunController](./src/main/java/com/spring/bot/demo/controller/MintFunController.java) : mybatis operation demo.(contains pagination query)
+* [MintFunController](./src/main/java/com/spring/bot/demo/controller/MintFunController.java) : mybatis operation demo.(contains pagination query and multi-table join query)
 
 ## $\color{#FF0000}{component}$
 this package is demos for spring boot property's use.

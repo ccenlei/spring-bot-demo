@@ -34,5 +34,6 @@ public class MintNftServiceTests {
     @Test
     void find_nft_by_id_test() throws Exception {
         MintNft nft = nftService.findNftById(2);
+        nft.getId();
     }
 }

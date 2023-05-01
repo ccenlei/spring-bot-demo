@@ -23,6 +23,7 @@ public class SneakyThrowsDemo {
     @SneakyThrows
     public void read() {
         InputStream is = new FileInputStream("");
+        is.close();
     }
 
     @SneakyThrows

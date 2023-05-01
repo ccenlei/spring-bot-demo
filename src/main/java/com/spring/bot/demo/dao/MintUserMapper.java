@@ -40,4 +40,6 @@ public interface MintUserMapper {
 
     @Update("UPDATE mint_fun_user SET following=#{following},followers=#{followers} WHERE id = #{id}")
     void updateUserById(MintUser mUser);
+
+    MintUser selectUserDetailById(Integer id);
 }

@@ -42,6 +42,15 @@ public class MintFunController {
         return ResponseEntity.ok(uMintUser);
     }
 
+    @GetMapping("/user/detail/{id}")
+    public ResponseEntity<MintUser> getUserDetailById(@PathVariable("id") Integer id) {
+        MintUser uMintUser = useService.findUserDetailById(id);
+        if (ObjectUtils.isEmpty(uMintUser)) {
+            throw new MintFunException(ImmutableMap.of("user id:", id), ErrorCode.MINT_USER_DETAIL_NOT_FOUND);
+        }
+        return ResponseEntity.ok(uMintUser);
+    }
+
     @GetMapping("/user")
     public ResponseEntity<List<MintUser>> getUserByName(@RequestParam("name") String name) {
         List<MintUser> users = useService.findUserByName(name);
