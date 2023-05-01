@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.ImmutableMap;
 import com.spring.bot.demo.component.LibraryProperties;
+import com.spring.bot.demo.dto.BookDto;
 import com.spring.bot.demo.entity.Book;
 import com.spring.bot.demo.exception.BookException;
+import com.spring.bot.demo.utils.BookBeanMapper;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,11 +35,17 @@ public class BookController {
 
     private AtomicInteger ids;
 
+    @Autowired
+    private BookBeanMapper bMapper;
+
     @PostMapping("/add")
-    public ResponseEntity<List<Book>> add(@RequestBody Book book) {
+    public ResponseEntity<List<BookDto>> add(@RequestBody BookDto bookDto) {
+        Book book = bMapper.toSource(bookDto);
         book.setId(ids.getAndIncrement());
         library.getBooks().add(book);
-        return ResponseEntity.ok(library.getBooks());
+        List<BookDto> bookDtos = library.getBooks().stream()
+                .map(b -> bMapper.tDto(b)).collect(Collectors.toList());
+        return ResponseEntity.ok(bookDtos);
     }
 
     @DeleteMapping("/{id}")
@@ -50,14 +58,14 @@ public class BookController {
 
     @GetMapping("/name")
     @ApiOperation(value = "Get books", notes = "Get books detail by book name", httpMethod = "GET")
-    public ResponseEntity<List<Book>> getByName(@RequestParam("name") String name) {
-        List<Book> targets = library.getBooks().stream()
+    public ResponseEntity<List<BookDto>> getByName(@RequestParam("name") String name) {
+        List<BookDto> bookDtos = library.getBooks().stream()
                 .filter(book -> name.equals(book.getName()))
-                .collect(Collectors.toList());
-        if (ObjectUtils.isEmpty(targets)) {
+                .map(book -> bMapper.tDto(book)).collect(Collectors.toList());
+        if (ObjectUtils.isEmpty(bookDtos)) {
             throw new BookException(ImmutableMap.of("book name:", name));
         }
-        return ResponseEntity.ok(targets);
+        return ResponseEntity.ok(bookDtos);
     }
 
     @Autowired

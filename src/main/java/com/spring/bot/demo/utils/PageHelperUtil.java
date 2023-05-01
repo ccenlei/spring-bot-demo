@@ -1,4 +1,4 @@
-package com.spring.bot.demo.entity;
+package com.spring.bot.demo.utils;
 
 import java.util.List;
 

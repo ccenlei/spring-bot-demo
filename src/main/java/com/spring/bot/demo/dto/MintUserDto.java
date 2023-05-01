@@ -1,11 +1,14 @@
-package com.spring.bot.demo.entity;
+package com.spring.bot.demo.dto;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
 
 @Data
-public class MintUser {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class MintUserDto {
 
     private Integer id;
 
@@ -17,5 +20,5 @@ public class MintUser {
 
     private Integer followers;
 
-    private List<MintNft> mNfts;
+    private List<MintNftDto> mNfts;
 }

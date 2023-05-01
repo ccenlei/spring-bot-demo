@@ -9,7 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.spring.bot.demo.dao.MintUserMapper;
 import com.spring.bot.demo.entity.MintUser;
-import com.spring.bot.demo.entity.PageHelperUtil;
+import com.spring.bot.demo.utils.PageHelperUtil;
 
 @Service
 public class MintUseService {
