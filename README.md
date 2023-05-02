@@ -86,9 +86,11 @@ curl http://localhost:8333/api/mint/user/detail/2
 ## $\color{#FF0000}{component}$
 this package is demos for spring boot property's use.
 
-### [LibraryProperties](./src/main/java/com/spring/bot/demo/component/LibraryProperties.java) :  a demo for spring boot loads property.
+*  [LibraryProperties](./src/main/java/com/spring/bot/demo/component/LibraryProperties.java) :  a demo for spring boot loads property.
 
-### [BeanMapperComponent](./src/main/java/com/spring/bot/demo/component/BeanMapperComponent.java) :  a demo for spring boot beans copy.
+*  [BeanMapperComponent](./src/main/java/com/spring/bot/demo/component/BeanMapperComponent.java) :  a demo for spring boot beans copy.
+
+*  [ServiceAsyncConfig](./src/main/java/com/spring/bot/demo/component/ServiceAsyncConfig.java) :  a demo for spring boot async support. this config creates a async executor named serviceExecutor, and then be used in [MintNftService](./src/main/java/com/spring/bot/demo/service/MintNftService.java) function asyncSaveNft() with annotation @Async("serviceExecutor").
 
 ## $\color{#FF0000}{lombok}$
 this package is demos for spring boot lombok's use. more details see: [lomboks](https://hezhiqiang8909.gitbook.io/java/docs/javalib/lombok)
