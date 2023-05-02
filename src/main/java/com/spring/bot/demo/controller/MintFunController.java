@@ -129,4 +129,11 @@ public class MintFunController {
         List<MintNftDto> nftDtos = nfts.stream().map(nft -> nMapper.tDto(nft)).collect(Collectors.toList());
         return ResponseEntity.ok(nftDtos);
     }
+
+    @PostMapping("/nft/add")
+    public ResponseEntity<?> addNft(@RequestBody @Valid MintNftDto nftDto) {
+        MintNft nft = nMapper.toSource(nftDto);
+        nftService.asyncSaveNft(nft);
+        return ResponseEntity.accepted().build();
+    }
 }

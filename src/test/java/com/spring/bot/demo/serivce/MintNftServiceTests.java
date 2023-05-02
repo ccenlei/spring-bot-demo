@@ -28,7 +28,7 @@ public class MintNftServiceTests {
         String json = oMapper.writeValueAsString(nft);
         System.out.println(json);
 
-        nftService.saveNft(nft);
+        nftService.asyncSaveNft(nft);
     }
 
     @Test

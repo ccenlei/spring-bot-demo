@@ -26,7 +26,7 @@ curl http://localhost:8333/api/book/name?name=love
 ```
 * [MintFunController](./src/main/java/com/spring/bot/demo/controller/MintFunController.java) : mybatis operation demo.(contains pagination query and multi-table join query)
 ```
-curl http://localhost:8333/api/mint/user/all?page=1&rows=3
+curl http://localhost:8333/api/mint/user/all?page=1&rows=2
 
 {
     "total": 5,
