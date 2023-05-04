@@ -7,7 +7,7 @@ import java.util.Date;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,13 +20,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.bot.demo.exception.ErrorCode;
 import com.spring.bot.demo.exception.ErrorResponse;
+import com.spring.bot.demo.utils.DemoUtils;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -155,46 +155,20 @@ public class DemoWebSecurityConfiguration {
      * @return
      */
     @Bean
-    UserDetailsService userDetailsService(@Autowired DataSource dataSource) {
+    JdbcUserDetailsManager userDetailsService(@Autowired DataSource dataSource) {
         JdbcUserDetailsManager jManager = new JdbcUserDetailsManager(dataSource);
         if (!jManager.userExists("user")) {
             jManager.createUser(User.withDefaultPasswordEncoder()
                     .username("user").password("user")
-                    .roles(roles("USER"))
+                    .roles(DemoUtils.roles("USER"))
                     .build());
         }
         if (!jManager.userExists("admin")) {
             jManager.createUser(User.withDefaultPasswordEncoder()
                     .username("admin").password("admin")
-                    .roles(roles("ADMIN"))
+                    .roles(DemoUtils.roles("ADMIN"))
                     .build());
         }
         return jManager;
-    }
-
-    /**
-     * temporary
-     * 
-     * unkown reason, useless:
-     * 
-     * <pre>
-     *
-     * @Bean
-     * RoleHierarchy roleHierarchy() {
-     *     RoleHierarchyImpl rHierarchy = new RoleHierarchyImpl();
-     *     rHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
-     *     return rHierarchy;
-     * }
-     * 
-     * </pre>
-     * 
-     * @param role
-     * @return
-     */
-    String[] roles(String role) {
-        if (StringUtils.equals("ADMIN", role)) {
-            return new String[] { role, "USER" };
-        }
-        return new String[] { role };
     }
 }
