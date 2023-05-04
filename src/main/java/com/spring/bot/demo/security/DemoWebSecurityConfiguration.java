@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AccountExpiredException;
@@ -17,9 +20,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -153,16 +155,21 @@ public class DemoWebSecurityConfiguration {
      * @return
      */
     @Bean
-    UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user").password("user")
-                .roles(roles("USER"))
-                .build();
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin").password("admin")
-                .roles(roles("ADMIN"))
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
+    UserDetailsService userDetailsService(@Autowired DataSource dataSource) {
+        JdbcUserDetailsManager jManager = new JdbcUserDetailsManager(dataSource);
+        if (!jManager.userExists("user")) {
+            jManager.createUser(User.withDefaultPasswordEncoder()
+                    .username("user").password("user")
+                    .roles(roles("USER"))
+                    .build());
+        }
+        if (!jManager.userExists("admin")) {
+            jManager.createUser(User.withDefaultPasswordEncoder()
+                    .username("admin").password("admin")
+                    .roles(roles("ADMIN"))
+                    .build());
+        }
+        return jManager;
     }
 
     /**
