@@ -81,6 +81,8 @@ curl http://localhost:8333/api/mint/user/detail/2
 ```
 * [MintFunExceptionHandler](./src/main/java/com/spring/bot/demo/controller/MintFunExceptionHandler.java) : a controller demo for handling MintFunController's exception and giving a response with detail error message. 
 
+* [RoleController](./src/main/java/com/spring/bot/demo/controller/RoleController.java) : a controller demo for role access control. 
+
 ## $\color{#FF0000}{configuration}$
 this package is demos for spring boot property's use.
 

@@ -12,17 +12,17 @@ import com.spring.bot.demo.utils.MintUserBeanMapper;
 public class BeanMapperConfig {
 
     @Bean
-    public BookBeanMapper bookBeanMapper() {
+    BookBeanMapper bookBeanMapper() {
         return Mappers.getMapper(BookBeanMapper.class);
     }
 
     @Bean
-    public MintNftBeanMapper nftBeanMapper() {
+    MintNftBeanMapper nftBeanMapper() {
         return Mappers.getMapper(MintNftBeanMapper.class);
     }
 
     @Bean
-    public MintUserBeanMapper userBeanMapper() {
+    MintUserBeanMapper userBeanMapper() {
         return Mappers.getMapper(MintUserBeanMapper.class);
     }
 }

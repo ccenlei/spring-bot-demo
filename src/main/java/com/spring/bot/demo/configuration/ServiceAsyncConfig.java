@@ -34,7 +34,7 @@ public class ServiceAsyncConfig implements AsyncConfigurer {
     private final AtomicInteger counter = new AtomicInteger(0);
 
     @Bean(name = "serviceExecutor")
-    public Executor serviceExecutor() {
+    Executor serviceExecutor() {
         return new ThreadPoolExecutor(coreSize, maxSize, 1, TimeUnit.MINUTES, queue(), threadFactory(), handler());
     }
 

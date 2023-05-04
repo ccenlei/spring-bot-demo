@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AccountExpiredException;
@@ -59,13 +60,20 @@ public class DemoWebSecurityConfiguration {
     /**
      * the implementation of security.
      * 
+     * requestMatchers: add role.
+     * 
+     * authenticated: all users need authenticated.
+     * 
      * @param http
      * @return
      * @throws Exception
      */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().anyRequest().authenticated()
+        http.authorizeHttpRequests()
+                .requestMatchers("/api/roles/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/roles/user/**").hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin(login -> login.loginPage("/login.html").loginProcessingUrl("/dologin")
                         .successHandler((requset, response, authentication) -> {
@@ -119,6 +127,7 @@ public class DemoWebSecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(handling -> handling
                         .authenticationEntryPoint((request, response, exp) -> {
+                            System.out.println(exp);
                             ErrorResponse eResponse = ErrorResponse.builder()
                                     .timestamp(new Date()).path(request.getRequestURI())
                                     .code(ErrorCode.LGOIN_ACCOUNT_NOT_YET.getCode())
@@ -147,12 +156,38 @@ public class DemoWebSecurityConfiguration {
     UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user").password("user")
-                .roles("USER")
+                .roles(roles("USER"))
                 .build();
         UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin").password("admin")
-                .roles("ADMIN", "USER")
+                .roles(roles("ADMIN"))
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
+    }
+
+    /**
+     * temporary
+     * 
+     * unkown reason, useless:
+     * 
+     * <pre>
+     *
+     * @Bean
+     * RoleHierarchy roleHierarchy() {
+     *     RoleHierarchyImpl rHierarchy = new RoleHierarchyImpl();
+     *     rHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
+     *     return rHierarchy;
+     * }
+     * 
+     * </pre>
+     * 
+     * @param role
+     * @return
+     */
+    String[] roles(String role) {
+        if (StringUtils.equals("ADMIN", role)) {
+            return new String[] { role, "USER" };
+        }
+        return new String[] { role };
     }
 }

@@ -2,6 +2,7 @@ package com.spring.bot.demo.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.method.P;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -15,7 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfig {
 
     @Bean
-    public Docket createRestApi() {
+    Docket createRestApi() {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()
@@ -25,7 +26,7 @@ public class SwaggerConfig {
 
     }
 
-    public ApiInfo apiInfo() {
+    ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("spring boot demo")
                 .description("ccenlei's spring boot demo")
