@@ -27,7 +27,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class DemoWebSecurityConfiguration {
 
     /**
-     * ignore static files.
+     * request validation ignores static files.
      * 
      * @return
      */
@@ -37,8 +37,8 @@ public class DemoWebSecurityConfiguration {
     }
 
     /**
-     * request validation ignores login page
-     *  
+     * all url requests validation ignores login controller
+     * 
      * @param http
      * @return
      * @throws Exception
@@ -47,14 +47,13 @@ public class DemoWebSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests().anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login.html").loginProcessingUrl("/dologin").permitAll()
-                .and()
-                .csrf().disable();
+                .formLogin((login) -> login.loginPage("/login.html").loginProcessingUrl("/dologin").permitAll())
+                .csrf((csrf) -> csrf.disable());
         return http.build();
     }
 
     /**
-     * add users, withDefaultPasswordEncoder() don't ecode password.
+     * add users
      * 
      * @return
      */
