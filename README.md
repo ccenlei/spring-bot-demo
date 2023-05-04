@@ -3,8 +3,6 @@ spring bot demo
 
 ## $\color{#FF0000}{controller}$
 this package is demos for spring boot controller's use.
-
-* [HelloWorldController](./src/main/java/com/spring/bot/demo/controller/HelloWorldController.java) : a controller demo.
 + [BookController](./src/main/java/com/spring/bot/demo/controller/BookController.java) : a controller demo for book library. 
   - add(): Post-Http for add book to library.
   - deleteById(): Delete-Http for del a book from library.

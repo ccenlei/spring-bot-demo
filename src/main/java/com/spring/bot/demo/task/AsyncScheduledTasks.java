@@ -7,8 +7,11 @@ import org.springframework.stereotype.Component;
 
 import com.spring.bot.demo.component.LibraryProperties;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
 @EnableAsync
+@Slf4j
 public class AsyncScheduledTasks {
 
     @Autowired
@@ -16,8 +19,7 @@ public class AsyncScheduledTasks {
 
     @Scheduled(cron = "1-2 * * * * ? ")
     public void reportLibrary() {
-        // todo need to log. 
-        System.out.println(String.format("Current Thread : %s", Thread.currentThread().getName()));
-        System.out.println(library.getBooks());
+        log.info(String.format("Current Thread : %s", Thread.currentThread().getName()));
+        log.info(library.getBooks().toString());
     }
 }
