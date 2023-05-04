@@ -1,7 +1,10 @@
 package com.spring.bot.demo.exception;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +18,7 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
 
     private int code;
@@ -25,7 +29,8 @@ public class ErrorResponse {
 
     private String path;
 
-    private Instant timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date timestamp;
 
     private Map<String, Object> data;
 }

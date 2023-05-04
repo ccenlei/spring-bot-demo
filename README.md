@@ -81,14 +81,14 @@ curl http://localhost:8333/api/mint/user/detail/2
 ```
 * [MintFunExceptionHandler](./src/main/java/com/spring/bot/demo/controller/MintFunExceptionHandler.java) : a controller demo for handling MintFunController's exception and giving a response with detail error message. 
 
-## $\color{#FF0000}{component}$
+## $\color{#FF0000}{configuration}$
 this package is demos for spring boot property's use.
 
-*  [LibraryProperties](./src/main/java/com/spring/bot/demo/component/LibraryProperties.java) :  a demo for spring boot loads property.
+*  [LibraryProperties](./src/main/java/com/spring/bot/demo/configuration/LibraryProperties.java) :  a demo for spring boot loads property.
 
-*  [BeanMapperComponent](./src/main/java/com/spring/bot/demo/component/BeanMapperComponent.java) :  a demo for spring boot beans copy.
+*  [BeanMapperComponent](./src/main/java/com/spring/bot/demo/configuration/BeanMapperConfig.java) :  a demo for spring boot beans copy.
 
-*  [ServiceAsyncConfig](./src/main/java/com/spring/bot/demo/component/ServiceAsyncConfig.java) :  a demo for spring boot async support. this config creates a async executor named serviceExecutor, and then be used in [MintNftService](./src/main/java/com/spring/bot/demo/service/MintNftService.java) function asyncSaveNft() with annotation @Async("serviceExecutor").
+*  [ServiceAsyncConfig](./src/main/java/com/spring/bot/demo/configuration/ServiceAsyncConfig.java) :  a demo for spring boot async support. this config creates a async executor named serviceExecutor, and then be used in [MintNftService](./src/main/java/com/spring/bot/demo/service/MintNftService.java) function asyncSaveNft() with annotation @Async("serviceExecutor").
 
 ## $\color{#FF0000}{lombok}$
 this package is demos for spring boot lombok's use. more details see: [lomboks](https://hezhiqiang8909.gitbook.io/java/docs/javalib/lombok)
@@ -112,3 +112,8 @@ this package is demos for spring bot app exceptions handling ways. there are 3 i
 this package is demos for spring boot scheduler.
 
 * [AsyncScheduledTasks](./src/main/java/com/spring/bot/demo/task/AsyncScheduledTasks.java) :  a demo for spring boot async task schedules.
+
+## $\color{#FF0000}{security}$
+this package is demos for spring boot security.
+
+* [DemoWebSecurityConfiguration](./src/main/java/com/spring/bot/demo/security/DemoWebSecurityConfiguration.java) :  a demo for spring boot security implementation.

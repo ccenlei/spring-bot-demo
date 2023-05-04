@@ -1,6 +1,6 @@
 package com.spring.bot.demo.controller;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +38,7 @@ public class MintFunExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message("request validate failed")
                 .path(request.getRequestURI())
-                .timestamp(Instant.now())
+                .timestamp(new Date())
                 .data(errors)
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -54,7 +54,7 @@ public class MintFunExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message("request validate failed")
                 .path(request.getRequestURI())
-                .timestamp(Instant.now())
+                .timestamp(new Date())
                 .data(errors)
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -68,7 +68,7 @@ public class MintFunExceptionHandler {
                 .status(code.getStatus().value())
                 .message(code.getMessage())
                 .path(request.getRequestURI())
-                .timestamp(Instant.now())
+                .timestamp(new Date())
                 .data(ex.getData())
                 .build();
         return ResponseEntity.status(code.getStatus()).body(response);

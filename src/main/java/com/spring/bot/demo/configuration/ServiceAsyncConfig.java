@@ -1,4 +1,4 @@
-package com.spring.bot.demo.component;
+package com.spring.bot.demo.configuration;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;

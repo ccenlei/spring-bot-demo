@@ -1,15 +1,15 @@
-package com.spring.bot.demo.component;
+package com.spring.bot.demo.configuration;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import com.spring.bot.demo.utils.BookBeanMapper;
 import com.spring.bot.demo.utils.MintNftBeanMapper;
 import com.spring.bot.demo.utils.MintUserBeanMapper;
 
-@Component
-public class BeanMapperComponent {
+@Configuration
+public class BeanMapperConfig {
 
     @Bean
     public BookBeanMapper bookBeanMapper() {

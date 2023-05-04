@@ -1,4 +1,4 @@
-package com.spring.bot.demo.component;
+package com.spring.bot.demo.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;

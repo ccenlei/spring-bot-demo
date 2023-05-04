@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.ImmutableMap;
-import com.spring.bot.demo.component.LibraryProperties;
+import com.spring.bot.demo.configuration.LibraryProperties;
 import com.spring.bot.demo.dto.BookDto;
 import com.spring.bot.demo.entity.Book;
 import com.spring.bot.demo.exception.BookException;
