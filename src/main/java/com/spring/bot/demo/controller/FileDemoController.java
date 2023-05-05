@@ -41,7 +41,6 @@ public class FileDemoController {
             return ResponseEntity.accepted().body(resMap(401, "file can not be empty"));
         }
         String filename = file.getOriginalFilename();
-        System.out.println(location);
         File desFile = new File(location + filename);
         try {
             file.transferTo(desFile);

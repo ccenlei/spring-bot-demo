@@ -62,9 +62,23 @@ public class DemoWebSecurityConfiguration {
     /**
      * the implementation of security.
      * 
-     * requestMatchers: add role.
+     * authorizeHttpRequests():
+     * method configures the authorization rules for the requests.
+     * In this case,
+     * requests to "/api/roles/admin/**"" require the ADMIN role,
+     * requests to "/api/roles/user/**" require the USER role,
+     * and any other request requires authentication.
      * 
-     * authenticated: all users need authenticated.
+     * formLogin():
+     * method configures the login page and processing URL for the application. It
+     * also sets up success and failure handlers for the login process
+     * 
+     * logout():
+     * method configures the logout process for the application.
+     * 
+     * exceptionHandling():
+     * method configures the handling of exceptions that occur during the
+     * authentication process.
      * 
      * @param http
      * @return
@@ -129,7 +143,6 @@ public class DemoWebSecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(handling -> handling
                         .authenticationEntryPoint((request, response, exp) -> {
-                            System.out.println(exp);
                             ErrorResponse eResponse = ErrorResponse.builder()
                                     .timestamp(new Date()).path(request.getRequestURI())
                                     .code(ErrorCode.LGOIN_ACCOUNT_NOT_YET.getCode())
@@ -150,7 +163,7 @@ public class DemoWebSecurityConfiguration {
     }
 
     /**
-     * add users. (@todo get users from database.)
+     * manager users in a database.
      * 
      * @return
      */
