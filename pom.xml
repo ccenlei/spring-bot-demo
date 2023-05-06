@@ -118,12 +118,18 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.12.0</version>
 		</dependency>
+		<!--openoffice dependencies-->
 		<dependency>
 			<groupId>org.jodconverter</groupId>
 			<artifactId>jodconverter-core</artifactId>
-			<version>4.4.2</version>
+			<version>4.2.0</version>
 		</dependency>
-		<!--user adds dependencies-->
+		<dependency>
+			<groupId>org.jodconverter</groupId>
+			<artifactId>jodconverter-local</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+		<!--openoffice dependencies-->
 	</dependencies>
 
 	<build>

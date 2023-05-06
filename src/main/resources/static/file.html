@@ -10,12 +10,13 @@
     $(document).ready(function () {
       $("button#list").click(function () {
         $.ajax({
-          url: "/api/files/list", async: true, success: function (result) {
+          url: "/api/files/list", async: true, success: function (result) { 
+            $("div#list").empty();
             $.each(result, function (index, item) {
               var listItem = '<ul><li>' + item.name +
                 '</li><li><a href="' + item.downloadUrl +
-                '">download</a></li><li><a href="' + item.previewUrl +
-                '">preview</a></li></url>';
+                '" target="_blank">download</a></li><li><a href="' + item.previewUrl +
+                '" target="_blank">preview</a></li></url>';
               $("div#list").append(listItem);
             });
           }

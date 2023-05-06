@@ -1,8 +1,12 @@
 package com.spring.bot.demo.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.bot.demo.dto.FileDemoDto;
 import com.spring.bot.demo.dto.FileResDto;
 import com.spring.bot.demo.service.FileDemoService;
+import com.spring.bot.demo.utils.DemoUtils;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Validated
@@ -37,7 +43,7 @@ public class FileDemoController {
         FileResDto resDto;
         try {
             resDto = demoService.upload(file);
-        } catch (IllegalStateException | IOException e) {
+        } catch (Exception e) {
             log.error("upload file failed : ", e);
             resDto = FileResDto.builder().status(500).message("file uploads failed").build();
         }
@@ -66,4 +72,18 @@ public class FileDemoController {
         List<FileDemoDto> fList = demoService.list();
         return ResponseEntity.ok().body(fList);
     }
+
+    @GetMapping("/preview")
+    public void previewPdf(HttpServletResponse response, @RequestParam("filename") String filepath) throws IOException {
+        String filename = DemoUtils.fileName(filepath);
+        String suffix = DemoUtils.fileSuffix(filepath);
+        response.setContentType(String.format("application/%s", suffix));
+        response.setHeader("Content-Disposition", "inline; filename=" + DemoUtils.encode(filename));
+        File file = new File(filepath);
+        try (FileInputStream iStream = new FileInputStream(file); OutputStream oStream = response.getOutputStream()) {
+            IOUtils.copy(iStream, oStream);
+            oStream.flush();
+        }
+    }
+
 }

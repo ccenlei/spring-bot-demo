@@ -83,6 +83,27 @@ curl http://localhost:8333/api/mint/user/detail/2
 
 * [RoleController](./src/main/java/com/spring/bot/demo/controller/RoleController.java) : a controller demo for role access control. 
 
++ [FileDemoController](./src/main/java/com/spring/bot/demo/controller/FileDemoController.java) : a controller demo for file - upload & download & preview. 
+    
+    - preview depend on [OpenOffice](https://www.openoffice.org/download/) app.
+    ```
+    <!--openoffice dependencies-->
+    <dependency>
+        <groupId>org.jodconverter</groupId>
+        <artifactId>jodconverter-core</artifactId>
+        <version>4.2.0</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.jodconverter</groupId>
+        <artifactId>jodconverter-local</artifactId>
+        <version>4.2.0</version>
+    </dependency>
+    <!--openoffice dependencies-->
+    ```
+    
+
+
 ## $\color{#FF0000}{configuration}$
 this package is demos for spring boot property's use.
 
