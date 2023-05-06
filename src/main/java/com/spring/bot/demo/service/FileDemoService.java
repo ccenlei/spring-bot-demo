@@ -2,7 +2,6 @@ package com.spring.bot.demo.service;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +33,6 @@ import com.spring.bot.demo.dto.FileDemoDto;
 import com.spring.bot.demo.dto.FileResDto;
 import com.spring.bot.demo.utils.DemoUtils;
 
-import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -191,13 +189,6 @@ public class FileDemoService {
         return null;
     }
 
-    /**
-     * need syncnized
-     * 
-     * @param fileName
-     * @return
-     */
-    @Synchronized
     private boolean existed(String fileName) {
         File file = new File(location + fileName);
         return file.exists();
