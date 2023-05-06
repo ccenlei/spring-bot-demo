@@ -4,6 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <title>文件上传demo</title>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("button#list").click(function () {
+        $.ajax({
+          url: "/api/files/list", async: true, success: function (result) {
+            $.each(result, function (index, item) {
+              var listItem = '<ul><li>' + item.name +
+                '</li><li><a href="' + item.downloadUrl +
+                '">download</a></li><li><a href="' + item.previewUrl +
+                '">preview</a></li></url>';
+              $("div#list").append(listItem);
+            });
+          }
+        });
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -14,6 +33,11 @@
       <input type="submit" value="Upload">
     </form>
   </div>
+  <div id="list">
+    <label>click button to see uploaded files</label>
+    </p>
+  </div>
+  <button id="list">list files</button>
 </body>
 
 </html>

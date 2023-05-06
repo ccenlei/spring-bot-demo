@@ -1,18 +1,11 @@
 package com.spring.bot.demo.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.bot.demo.dto.FileDemoDto;
+import com.spring.bot.demo.dto.FileResDto;
+import com.spring.bot.demo.service.FileDemoService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Validated
@@ -32,49 +29,41 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDemoController {
 
-    @Value("${demo.file.multipart.location}")
-    private String location;
+    @Autowired
+    private FileDemoService demoService;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
-        if (ObjectUtils.isEmpty(file)) {
-            return ResponseEntity.accepted().body(resMap(401, "file can not be empty"));
-        }
-        String filename = file.getOriginalFilename();
-        File desFile = new File(location + filename);
+    public ResponseEntity<FileResDto> uploadFile(@RequestParam("file") MultipartFile file) {
+        FileResDto resDto;
         try {
-            file.transferTo(desFile);
+            resDto = demoService.upload(file);
         } catch (IllegalStateException | IOException e) {
             log.error("upload file failed : ", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                    .body(resMap(500, "file uploads failed"));
+            resDto = FileResDto.builder().status(500).message("file uploads failed").build();
         }
-        return ResponseEntity.accepted().body(resMap(200, "file uploads succeed"));
+        return ResponseEntity.status(resDto.getStatus()).body(resDto);
     }
 
     @GetMapping("/download/{filename}")
     public ResponseEntity<?> downloadFile(@PathVariable("filename") String filename) {
-        String filePath = location + filename;
-        Path file = Paths.get(filePath);
         try {
-            Resource resource = new UrlResource(file.toUri());
+            Resource resource = demoService.download(filename);
             String contentDisposition = "attachment; filename=" + resource.getFilename();
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .contentLength(resource.contentLength())
                     .body(resource);
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error("download file failed : ", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                    .body(resMap(500, "file downloads failed"));
+            return ResponseEntity.status(500)
+                    .body(FileResDto.builder().status(500).message("file downloads failed").build());
         }
     }
 
-    Map<String, Object> resMap(Integer status, String message) {
-        Map<String, Object> res = new HashMap<>();
-        res.put("status", status);
-        res.put("message", message);
-        return res;
+    @GetMapping("/list")
+    public ResponseEntity<List<FileDemoDto>> listFiles() {
+        List<FileDemoDto> fList = demoService.list();
+        return ResponseEntity.ok().body(fList);
     }
 }
