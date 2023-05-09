@@ -140,6 +140,7 @@ public class DemoWebSecurityConfiguration {
                                 writeOut(eResponse, response);
                             }
                         }))
+                .rememberMe(me -> me.key("demos"))
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(handling -> handling
                         .authenticationEntryPoint((request, response, exp) -> {
