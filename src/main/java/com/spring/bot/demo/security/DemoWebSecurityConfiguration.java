@@ -22,6 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.bot.demo.exception.ErrorCode;
@@ -48,6 +49,9 @@ import lombok.extern.slf4j.Slf4j;
 public class DemoWebSecurityConfiguration {
 
     private final ObjectMapper oMapper = new ObjectMapper();
+
+    @Autowired
+    private DataSource dataSource;
 
     /**
      * request validation ignores static files. (e.g. html/css)
@@ -140,7 +144,7 @@ public class DemoWebSecurityConfiguration {
                                 writeOut(eResponse, response);
                             }
                         }))
-                .rememberMe(me -> me.key("demos"))
+                .rememberMe(me -> me.key("demos").tokenRepository(tokenRepositoryImpl()))
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(handling -> handling
                         .authenticationEntryPoint((request, response, exp) -> {
@@ -169,7 +173,7 @@ public class DemoWebSecurityConfiguration {
      * @return
      */
     @Bean
-    JdbcUserDetailsManager userDetailsService(@Autowired DataSource dataSource) {
+    JdbcUserDetailsManager userDetailsService() {
         JdbcUserDetailsManager jManager = new JdbcUserDetailsManager(dataSource);
         if (!jManager.userExists("user")) {
             jManager.createUser(User.withDefaultPasswordEncoder()
@@ -184,5 +188,12 @@ public class DemoWebSecurityConfiguration {
                     .build());
         }
         return jManager;
+    }
+
+    @Bean
+    JdbcTokenRepositoryImpl tokenRepositoryImpl() {
+        JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepositoryImpl.setDataSource(dataSource);
+        return jdbcTokenRepositoryImpl;
     }
 }
