@@ -123,4 +123,19 @@ public class DemoUtils {
             return path;
         }
     }
+
+    public static int ipStr2Int(String ipStr) {
+        String[] lines = StringUtils.split(ipStr, "\\.");
+        int ipInt = 0;
+        for (String line :lines) {
+            int num = Integer.parseInt(line);
+            ipInt = num | (ipInt << 8);
+        }
+        return ipInt;
+    }
+
+    public static String ipInt2Str(int ipInt) {
+        String ipStr = ((ipInt >> 24) & 0xff) + "." + ((ipInt >> 16) & 0xff) + "." + ((ipInt >> 8) & 0xff) + "." + (ipInt & 0xff);
+        return ipStr;
+    }
 }
