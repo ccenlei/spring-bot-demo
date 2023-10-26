@@ -7,6 +7,8 @@ import lombok.var;
 /**
  * ThreadLocal Demo
  * 
+ * Usually used for thread unsafe object.
+ * 
  */
 public class BookContext implements AutoCloseable {
 
