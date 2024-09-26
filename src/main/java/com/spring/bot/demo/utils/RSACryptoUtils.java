@@ -14,9 +14,6 @@ import javax.crypto.Cipher;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import com.github.hui.quick.plugin.qrcode.wrapper.QrCodeGenWrapper;
-import com.github.hui.quick.plugin.qrcode.wrapper.QrCodeOptions;
-
 public class RSACryptoUtils {
 
     static final String KEY_ALGORITHM = "RSA";
@@ -61,35 +58,5 @@ public class RSACryptoUtils {
 
     public static byte[] decryptBase64(String keyBase64Str) {
         return Base64.getDecoder().decode(keyBase64Str);
-    }
-
-    public static void main(String[] args) throws Exception {
-        KeyPair kPair = geneRSAKeyPair(1024);
-        PublicKey pubKey = kPair.getPublic();
-        PrivateKey priKey = kPair.getPrivate();
-
-        String priKeyStr = encryptBase64(priKey.getEncoded());
-        System.out.println(priKeyStr);
-        System.out.println();
-
-        String encryptStr = encryptRSA("てらとちはち", pubKey);
-        System.out.println(encryptStr);
-        System.out.println();
-
-        String decryptStr = decryptRSA(encryptStr, priKeyStr);
-        System.out.println(decryptStr);
-
-        String qrDir = "/Users/coushi/Documents/Developments/qr/tmp";
-        String logo = "/Users/coushi/Documents/Developments/qr/Pasted6.png";
-
-        boolean ans = QrCodeGenWrapper.of(encryptStr)
-                .setW(400)
-                .setLogo(logo)
-                .setLogoStyle(QrCodeOptions.LogoStyle.ROUND)
-                .setLogoBgColor(0xfffefefe)
-                .setLogoBorderBgColor(0xffc7c7c7)
-                .setLogoBorder(true)
-                .asFile(qrDir + "/lqr4.png");
-        System.out.println(ans);
     }
 }

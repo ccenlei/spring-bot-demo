@@ -5,6 +5,7 @@ import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import com.github.hui.quick.plugin.qrcode.wrapper.QrCodeDeWrapper;
 import com.github.hui.quick.plugin.qrcode.wrapper.QrCodeGenWrapper;
 import com.github.hui.quick.plugin.qrcode.wrapper.QrCodeOptions;
 import com.spring.bot.demo.utils.RSACryptoUtils;
@@ -18,6 +19,11 @@ public class CryptoQR {
     private final int keysize = 1024;
 
     private final String tapStr = "てら";
+
+    public String decodeQRCode(String imgPath) throws Exception {
+        String ans = QrCodeDeWrapper.decode(imgPath);
+        return ans;
+    }
 
     public String exportQRCodeImg(String keyWords) throws Exception {
         KeyPair kPair = RSACryptoUtils.geneRSAKeyPair(this.keysize);
@@ -55,12 +61,12 @@ public class CryptoQR {
     }
 
     private String riseNoise(final String oriStr) {
-        String tarStr = oriStr + "    ";
+        String tarStr = new StringBuffer(oriStr).reverse().toString();
         return tarStr;
     }
 
     private String reduceNoise(final String oriStr) {
-        String tarStr = oriStr.strip();
+        String tarStr = new StringBuffer(oriStr).reverse().toString();
         return tarStr;
     }
 
